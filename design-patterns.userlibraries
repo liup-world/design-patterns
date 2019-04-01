@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="lib">
+    <archive path="/Users/liup/work/Java/design-patterns/lib/junit-4.12.jar" />
+    <archive path="/Users/liup/work/Java/design-patterns/lib/commons-lang-2.6.jar" />
+    <archive path="/Users/liup/work/Java/design-patterns/lib/hamcrest-all-1.3.jar" />
+  </library>
+</eclipse-userlibraries>
+

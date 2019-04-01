@@ -1,0 +1,10 @@
+
+结构型模式(structual) 7种：
+
+  adapter   适配器模式
+  bridge    桥接模式
+  composite 组合模式
+  decorator 装饰模式
+  facade    外观模式
+  flyweight 享元模式
+  proxy     代理模式

@@ -1,0 +1,10 @@
+
+创建型模式(creational) 6种：
+
+  builder   建造者模式
+  factory   工厂模式
+    abstract  抽象工厂模式
+    method    工厂方法模式
+    simple    简单工程模式
+  prototype 原型模式
+  singlegon 单例模式
