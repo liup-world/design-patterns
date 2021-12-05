@@ -5,17 +5,21 @@ import com.bobsystem.creational.builder.AirplanComponent;
 import com.bobsystem.creational.builder.WingComponent;
 import com.bobsystem.creational.builder.interfaces.IAirplanBuilder;
 
-import com.bobsystem.creational.factory_abstract.daofactory.DAOFactory;
-import com.bobsystem.creational.factory_abstract.daofactory.MySQLDAOFactory;
-import com.bobsystem.creational.factory_abstract.daofactory.interfaces.IDAOFactory;
-import com.bobsystem.creational.factory_abstract.bean.Department;
-import com.bobsystem.creational.factory_abstract.bean.User;
-import com.bobsystem.creational.factory_abstract.dao.interfaces.IDepartmentDAO;
-import com.bobsystem.creational.factory_abstract.dao.interfaces.IUserDAO;
+import com.bobsystem.creational.factory_abstract.ISuperFactory;
+import com.bobsystem.creational.factory_abstract.SuperFactory;
 
-import com.bobsystem.creational.factory_method.Arithom;
-import com.bobsystem.creational.factory_method.ArithomAddFactory;
-import com.bobsystem.creational.factory_method.interfaces.IArithomFactory;
+import com.bobsystem.creational.factory_abstract.color.interfaces.IColor;
+import com.bobsystem.creational.factory_abstract.color.interfaces.IColorCreator;
+import com.bobsystem.creational.factory_abstract.factory.interfaces.IColorFactory;
+import com.bobsystem.creational.factory_abstract.factory.interfaces.IShapeFactory;
+import com.bobsystem.creational.factory_abstract.factory.interfaces.IToolFactory;
+import com.bobsystem.creational.factory_abstract.shape.interfaces.IShape;
+import com.bobsystem.creational.factory_abstract.shape.interfaces.IShapeCreator;
+import com.bobsystem.creational.factory_abstract.tool.interfaces.ITool;
+import com.bobsystem.creational.factory_abstract.tool.interfaces.IToolCreator;
+import com.bobsystem.creational.factory_method.Arithmetic;
+import com.bobsystem.creational.factory_method.ArithmeticAddFactory;
+import com.bobsystem.creational.factory_method.interfaces.IArithmeticFactory;
 
 import com.bobsystem.creational.factory_simple.OperationFactory;
 import com.bobsystem.creational.factory_simple.OperationType;
@@ -43,47 +47,49 @@ public class CreationalPatternsTest {
         System.out.println(wing);
     }
 
+    //region 3 个工厂模式
     @Test
     public void testAbstractFactory() {
+        ISuperFactory factory = SuperFactory.instance();
 
-        // 第一种 根据配置创建不同数据库的DAO
-        IDAOFactory factory = new DAOFactory();
+        IShapeFactory shapeFactory = factory.shapeFactory();
+        IShapeCreator circleCreator = shapeFactory.circleCreator();
+        IShape circle = circleCreator.create();
+        circle.draw();
 
-        IDepartmentDAO departmentDAO = factory.createDepartmentDAO();
-        departmentDAO.insert(new Department());
-        //departmentDAO.get();
+        IColorFactory colorFactory = factory.colorFactory();
+        IColorCreator greenCreateor = colorFactory.greenCreator();
+        IColor green = greenCreateor.create();
+        green.paint();
 
-        // 第二种 使用具体数据库的工厂创建DAO
-        IDAOFactory factory2 = new MySQLDAOFactory();
-
-        IUserDAO userDAO = factory2.createUserDAO();
-        userDAO.insert(new User());
-        //userDAO.get();
+        IToolFactory toolFactory = factory.toolFactory();
+        IToolCreator pencilCreator = toolFactory.pencilCreator();
+        ITool pencil = pencilCreator.create();
+        pencil.use();
     }
 
     @Test
     public void testFactoryMethod() {
+        IArithmeticFactory factory = new ArithmeticAddFactory();
 
-        IArithomFactory factory = new ArithomAddFactory();
+        Arithmetic arithmetic = factory.create();
+        arithmetic.setNumA(3);
+        arithmetic.setNumB(5);
 
-        Arithom arithom = factory.create();
-        arithom.setNumA(3);
-        arithom.setNumB(5);
-
-        double result = arithom.getResult();
+        double result = arithmetic.getResult();
         System.out.println(result);
     }
 
     @Test
     public void testSimpleFactory() {
-
-        Operation operation = OperationFactory.createOperaion(OperationType.divide);
+        Operation operation = OperationFactory.create(OperationType.divide);
         operation.setNumA(3);
         operation.setNumB(5);
 
         double result = operation.getResult();
         System.out.println(result);
     }
+    //endregion 3 个工厂模式
 
     @Test
     public void testPrototype() {

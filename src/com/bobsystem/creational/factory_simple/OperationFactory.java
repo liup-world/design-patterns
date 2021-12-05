@@ -14,7 +14,7 @@ import com.bobsystem.creational.factory_simple.operation.OperateMultiply;
  */
 public class OperationFactory {
 
-    public static Operation createOperaion(OperationType type) {
+    public static Operation create(OperationType type) {
 
         Operation result = null;
         switch (type.value) {
