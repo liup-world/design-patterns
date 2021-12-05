@@ -7,7 +7,11 @@ public class RegisterPerson
 
     @Override
     public void regist() {
+        System.out.println("i'l regist a compnay.");
+    }
 
-        System.out.println("i'l regist a compnay。");
+    @Override
+    public void makeOfficialSeal() {
+        System.out.println("help me make official seal.");
     }
 }

@@ -12,24 +12,22 @@ package com.bobsystem.structural.flyweight;
 public class IPhone {
 
     private final String sn;
-    private final IPhoneChips model;
+    private final IPhoneChips chips;
     private final Checker checker;
 
     /**
      * @param manufacturer 芯片厂商
      * @param hertz   芯片频率
      */
-    public IPhone(String sn, String manufacturer, int hertz, String checker,
-        int checkerAge) {
-
+    public IPhone(String sn, String manufacturer, int hertz, String checker, int checkerAge) {
         this.sn = sn;
-        this.model = IPhoneChips.get(manufacturer, hertz);
+        this.chips = IPhoneChips.get(manufacturer, hertz);
         this.checker = Checker.get(checker, checkerAge);
     }
 
     @Override
     public String toString() {
-        return String.format("IPhone{sn='%s', model.hashCode=%d, checker.hashCode=%d}';",
-            sn, model.hashCode(), checker.hashCode());
+        return String.format("IPhone{sn='%s', chips.hashCode=%d, checker.hashCode=%d}';",
+            sn, chips.hashCode(), checker.hashCode());
     }
 }

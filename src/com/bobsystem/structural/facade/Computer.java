@@ -14,13 +14,10 @@ public class Computer {
     private final CPU cpu = new CPU();
 
     public void start() {
-
         System.out.println("摁下开关，机器通电。");
-
         this.mainboard.boot();
         this.memory.load();
         this.cpu.process();
-
-        System.out.println("电脑启动。");
+        System.out.println("电脑启动完成。");
     }
 }

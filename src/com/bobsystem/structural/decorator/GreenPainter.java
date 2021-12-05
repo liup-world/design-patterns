@@ -2,13 +2,13 @@ package com.bobsystem.structural.decorator;
 
 import com.bobsystem.structural.decorator.interfaces.IPaint;
 
-public class GreenPaint
-    extends Paint {
+public class GreenPainter
+    extends Painter {
 
-    public GreenPaint() {
+    public GreenPainter() {
     }
 
-    public GreenPaint(IPaint paint) {
+    public GreenPainter(IPaint paint) {
 
         super(paint);
     }

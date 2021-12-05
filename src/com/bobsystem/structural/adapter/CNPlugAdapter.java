@@ -21,11 +21,10 @@ public class CNPlugAdapter
 
     @Override
     public void smallPin() {
-
         System.out.println("大陆的插板是 小针的，在这里 将香港 大针插头 转换为小针的");
-
-        if (this.hkPlug != null) {
-            this.hkPlug.bigPin();
+        HKPlug hkPlug = this.hkPlug;
+        if (hkPlug != null) {
+            hkPlug.bigPin();
         }
     }
 }

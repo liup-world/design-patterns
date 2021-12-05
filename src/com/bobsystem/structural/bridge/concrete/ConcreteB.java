@@ -5,7 +5,6 @@ public class ConcreteB
 
     @Override
     public void operator() {
-
-        System.out.println("this is ConcreateB operator");
+        System.out.println("this is ConcreateB operator。加奶咖啡");
     }
 }

@@ -2,14 +2,14 @@ package com.bobsystem.structural.decorator;
 
 import com.bobsystem.structural.decorator.interfaces.IPaint;
 
-public class Paint
+public class Painter
     implements IPaint {
 
     private IPaint paint;
 
-    protected Paint() { }
+    protected Painter() { }
 
-    public Paint(IPaint paint) {
+    public Painter(IPaint paint) {
         this.paint = paint;
     }
 
