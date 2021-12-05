@@ -1,8 +1,8 @@
 package com.bobsystem.creational.builder.interfaces;
 
-import com.bobsystem.creational.builder.Airplan;
+import com.bobsystem.creational.builder.AirplanComponent;
 
 public interface IAirplanBuilder {
 
-    Airplan build();
+    AirplanComponent build();
 }

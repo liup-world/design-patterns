@@ -1,6 +1,8 @@
 package com.bobsystem.creational;
 
 import com.bobsystem.creational.builder.Airplan;
+import com.bobsystem.creational.builder.AirplanComponent;
+import com.bobsystem.creational.builder.WingComponent;
 import com.bobsystem.creational.builder.interfaces.IAirplanBuilder;
 
 import com.bobsystem.creational.factory_abstract.daofactory.DAOFactory;
@@ -25,16 +27,20 @@ import com.bobsystem.creational.singleton.Singleton;
 
 import org.junit.Test;
 
-// 创建型模式
+/**
+ * 创建型模式：单例模式、建造者模式、原型模式、3 个工厂模式
+ */
 public class CreationalPatternsTest {
 
     @Test
     public void testBuilder() {
-
         IAirplanBuilder builder = new Airplan.Builder();
-
-        Airplan airplan = builder.build();
+        Airplan airplan = (Airplan)builder.build();
         System.out.println(airplan);
+
+        builder = new WingComponent.Builder();
+        AirplanComponent wing = builder.build();
+        System.out.println(wing);
     }
 
     @Test
@@ -81,10 +87,8 @@ public class CreationalPatternsTest {
 
     @Test
     public void testPrototype() {
-
         Prototype prototype = new Prototype();
         System.out.println(prototype);
-
         try {
             Prototype prototype2 = prototype.clone();
             System.out.println(prototype2);
