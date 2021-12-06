@@ -2,28 +2,27 @@ package com.bobsystem.behavioral.interpreter;
 
 public class InterpreterContext {
 
+    //region property fields
     private AExpression rightExpression;
     private AExpression swimExpression;
     private AExpression flyExpression;
 
     private String[] instructions;
     private int instructionIndex;
+    //endregion property fields
 
     public InterpreterContext(String instruction) {
-
         this.instructions = instruction.split("[ ,;]");
     }
 
     public void interpreter() {
-
-        if (this.instructions == null || this.instructions.length == 0) {
+        String[] instructions = this.instructions;
+        if (instructions == null || instructions.length == 0) {
             return;
         }
-        for (int c = this.instructions.length; instructionIndex < c; ++instructionIndex) {
-
+        for (int c = instructions.length; instructionIndex < c; ++instructionIndex) {
             String instruction = instructions[instructionIndex];
             if ("".equals(instruction)) continue;
-
             if ("right".equals(instruction)) {
 
                 if (this.rightExpression != null) {
@@ -39,15 +38,15 @@ public class InterpreterContext {
                 continue;
             }
             if ("fly".equals(instruction)) {
-
                 if (this.flyExpression != null) {
                     this.flyExpression.interpreter(this);
                 }
-                continue;
+                //continue;
             }
         }
     }
 
+    //region getter setter
     public void setRightExpression(AExpression rightExpression) {
         this.rightExpression = rightExpression;
     }
@@ -75,4 +74,5 @@ public class InterpreterContext {
     public void setInstructionIndex(int instructionIndex) {
         this.instructionIndex = instructionIndex;
     }
+    //endregion getter setter
 }

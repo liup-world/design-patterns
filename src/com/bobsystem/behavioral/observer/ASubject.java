@@ -7,36 +7,33 @@ import java.util.List;
 
 public abstract class ASubject {
 
+    //region property fields
     protected String state;
 
     private final List<IObserver> observers = new ArrayList<IObserver>();
+    //endregion property fields
 
+    //region member methods
     public void attach(IObserver observer) {
-
         attach(observer, true);
     }
 
     public void attach(IObserver observer, boolean repeatable) {
-
-        if (!repeatable && this.observers.contains(observer)) {
-
+        List<IObserver> observers = this.observers;
+        if (!repeatable && observers.contains(observer)) {
             return;
         }
-
-        this.observers.add(observer);
+        observers.add(observer);
     }
 
     public void detach(IObserver observer) {
-
         detach(observer, false);
     }
 
     public void detach(IObserver observer, boolean allSame) {
-
-        while (this.observers.contains(observer)) {
-
-            this.observers.remove(observer);
-
+        List<IObserver> observers = this.observers;
+        while (observers.contains(observer)) {
+            observers.remove(observer);
             if (!allSame) {
                 break;
             }
@@ -44,10 +41,9 @@ public abstract class ASubject {
     }
 
     protected void notice() {
-
-        for (IObserver observer : observers) {
-
-            observer.invoke();
+        for (IObserver observer : this.observers) {
+            observer.invoke(this.state);
         }
     }
+    //endregion member methods
 }

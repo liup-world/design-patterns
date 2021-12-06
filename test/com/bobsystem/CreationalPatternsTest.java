@@ -1,4 +1,4 @@
-package com.bobsystem.creational;
+package com.bobsystem;
 
 import com.bobsystem.creational.builder.Airplan;
 import com.bobsystem.creational.builder.AirplanComponent;

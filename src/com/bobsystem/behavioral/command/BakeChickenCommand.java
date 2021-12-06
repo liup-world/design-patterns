@@ -3,19 +3,17 @@ package com.bobsystem.behavioral.command;
 public class BakeChickenCommand
     extends ACommand {
 
-    public BakeChickenCommand(Cook barbecuer){
+    public BakeChickenCommand(Cook barbecuer) {
         super(barbecuer);
     }
 
     @Override
     public void execute() {
-
-        cook.bakeChicken();
+        super.cook.bakeChicken();
     }
 
     @Override
     public String toString() {
-
-        return "BakeChickenCommand";
+        return "烤鸡";
     }
 }

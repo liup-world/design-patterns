@@ -1,5 +1,5 @@
 
-行为型模式(behavioral) 10种：
+行为型模式(behavioral) 10 种：
 
   command  命令模式
   interpreter 解释器模式

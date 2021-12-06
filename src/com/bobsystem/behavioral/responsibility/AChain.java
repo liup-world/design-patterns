@@ -4,7 +4,7 @@ public abstract class AChain {
 
     protected AChain chain;
 
-    public void setChain(AChain chain) {
+    protected AChain(AChain chain) {
         this.chain = chain;
     }
 

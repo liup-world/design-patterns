@@ -11,7 +11,6 @@ public class DuckFlyExpression
 
     @Override
     protected void perform(InterpreterContext context) {
-
         super.duck.fly();
     }
 }

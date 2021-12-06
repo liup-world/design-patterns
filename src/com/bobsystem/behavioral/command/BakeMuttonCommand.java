@@ -9,7 +9,6 @@ public class BakeMuttonCommand
 
     @Override
     public void execute() {
-
         cook.bakeMutton();
     }
 

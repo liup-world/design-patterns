@@ -20,10 +20,11 @@ public class DuckSwimExpression
 
         int times = 1;
         try {
-            times = Integer.valueOf(strTimes);
+            times = Integer.parseInt(strTimes);
             context.setInstructionIndex(index);
         }
         catch (NumberFormatException ex) {
+            ex.fillInStackTrace();
         }
         for (int i = 0; i < times; ++i) {
 

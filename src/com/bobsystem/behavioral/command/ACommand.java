@@ -5,7 +5,6 @@ public abstract class ACommand {
     protected final Cook cook;
 
     protected ACommand(Cook cook){
-
         this.cook = cook;
     }
 

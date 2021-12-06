@@ -3,49 +3,42 @@ package com.bobsystem.behavioral.memento;
 /**
  * 游戏角色
  */
-public class GameRole {
+public class GameRole
+    implements Cloneable {
 
     private int vitality; // 生命力
     private int attack;  // 攻击力
     private int defense; // 防御力
 
     public GameRole() {
-    }
-
-    public GameRole(int vitality, int attack, int defense) {
-
-        this.vitality = vitality;
-        this.attack = attack;
-        this.defense = defense;
+        this.defense = this.vitality = this.attack = 100;
     }
 
     //region 备忘录模式 相关机制
-
-    /** 保存角色状态 */
-    public GameRole duplicate() {
-
-        return new GameRole(this.vitality, this.attack, this.defense);
+    /**
+     * 复制角色状态
+     */
+    @Override
+    public GameRole clone() {
+        try {
+            return (GameRole) super.clone();
+        }
+        catch (CloneNotSupportedException ex) {
+            ex.printStackTrace();;
+        }
+        return null;
     }
 
     /** 恢复角色状态 */
     public void recovery(GameRole role) {
-
         this.vitality = role.getVitality();
         this.attack = role.getAtk();
         this.defense = role.getDefense();
     }
-
     //endregion
-
-    /** 初始化状态 */
-    public void initial() {
-
-        this.defense = this.vitality = this.attack = 100;
-    }
 
     /** 战斗结束后状态 */
     public void pkOver() {
-
         this.defense = 0;
         this.vitality = 0;
         this.attack = 0;
@@ -53,7 +46,6 @@ public class GameRole {
 
     /** 显示角色状态 */
     public void show() {
-
         System.out.println(this);
     }
 

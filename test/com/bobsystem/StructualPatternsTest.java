@@ -1,4 +1,4 @@
-package com.bobsystem.structual;
+package com.bobsystem;
 
 import com.bobsystem.structural.adapter.CNPlugAdapter;
 import com.bobsystem.structural.adapter.HKPlug;
@@ -44,6 +44,7 @@ public class StructualPatternsTest {
 
     /**
      * 桥接模式。解决对象继承在某些业务中，造成混乱，不好维护的问题。
+     *   代码中的咖啡示例，用装饰模式、行为模式中的命令模式也很适合。
      */
     @Test
     public void testBridge() {
