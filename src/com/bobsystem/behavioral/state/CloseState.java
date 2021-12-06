@@ -5,9 +5,7 @@ public class CloseState
 
     @Override
     public void process(StateContext context) {
-
-        System.out.println("close state.. next open");
-
-        context.setState(StateContext.openState);
+        System.out.println("current close -> next open");
+        context.setState(StateContext.STATE_OPEN);
     }
 }

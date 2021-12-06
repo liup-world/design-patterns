@@ -5,9 +5,7 @@ public class OpenState
 
     @Override
     public void process(StateContext context) {
-
-        System.out.println("open state.. next run");
-
-        context.setState(StateContext.runState);
+        System.out.println("current open -> next run");
+        context.setState(StateContext.STATE_RUN);
     }
 }

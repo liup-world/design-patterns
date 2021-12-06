@@ -1,13 +1,11 @@
 package com.bobsystem.behavioral.state;
 
-public class StopState
+public class PauseState
     extends ALiftState {
 
     @Override
     public void process(StateContext context) {
-
-        System.out.println("stop state.. next close");
-
-        context.setState(StateContext.closeState);
+        System.out.println("current stop -> next close");
+        context.setState(StateContext.STATE_CLOSE);
     }
 }

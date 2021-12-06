@@ -5,12 +5,12 @@ package com.bobsystem.behavioral.state;
  */
 public class StateContext {
 
-    public static final ALiftState openState = new OpenState();
-    public static final ALiftState closeState = new CloseState();
-    public static final ALiftState runState = new RunState();
-    public static final ALiftState stopState = new StopState();
+    public static final ALiftState STATE_OPEN = new OpenState();
+    public static final ALiftState STATE_RUN = new RunState();
+    public static final ALiftState STATE_PAUSE = new PauseState();
+    public static final ALiftState STATE_CLOSE = new CloseState();
 
-    private ALiftState state = closeState;
+    private ALiftState state = STATE_CLOSE;
 
     public void process() {
         this.state.process(this);

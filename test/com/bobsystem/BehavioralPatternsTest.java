@@ -36,17 +36,24 @@ import com.bobsystem.behavioral.state.StateContext;
 import com.bobsystem.behavioral.strategy.DiscountContext;
 
 import com.bobsystem.behavioral.template.AAccount;
-import com.bobsystem.behavioral.template.AccountInterest;
+import com.bobsystem.behavioral.template.CCBInterest;
+import com.bobsystem.behavioral.template.ICBCInterest;
 
-import com.bobsystem.behavioral.visitor.StructureObject;
+import com.bobsystem.behavioral.visitor.Playground;
 import com.bobsystem.behavioral.visitor.Visitor;
-import com.bobsystem.behavioral.visitor.interfaces.IElement;
+import com.bobsystem.behavioral.visitor.interfaces.IAmusement;
 import com.bobsystem.behavioral.visitor.interfaces.IVisitor;
 
 import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * 行为型模式。
+ *   以是否执行一组业务区分，命令模式、观察者模式、职责链模式、访问者模式 相似。
+ *   以是否为 机制-策略 区分，策略模式、状态模式、解释器模式、中介模式 相似。
+ *   以互为关系区分，观察者模式、访问者模式 相似。
+ */
 public class BehavioralPatternsTest {
 
     /**
@@ -175,7 +182,9 @@ public class BehavioralPatternsTest {
     }
 
     /**
-     * 状态模式
+     * 状态模式。
+     *   将不同状态的业务处理封装为不同的对象，避免创建庞大复杂、不易维护的对象。
+     *   通过变换状态机的状态，让数据分发到对应的业务。
      */
     @Test
     public void testState() {
@@ -186,68 +195,75 @@ public class BehavioralPatternsTest {
         context.process();
         System.out.println();
 
-        context.setState(StateContext.closeState);
+        context.setState(StateContext.STATE_CLOSE);
         context.process();
         context.process();
     }
 
     /**
-     * 策略模式
+     * 策略模式。策略-机制的实现。
+     *   将不同的业务处理封装为不同的对象，避免创建庞大复杂、不易维护的对象。
      */
     @Test
     public void testStrategy() {
-
-        DiscountContext context = new DiscountContext();
-
         float price = 100;
         System.out.printf("原价 %f 元%n", price);
 
-        context.setVipLevel(1);
-        System.out.printf("普通会员享受单价：%f%n", context.calculate(price));
-
-        context.setVipLevel(2);
-        System.out.printf("黄金会员享受单价：%f%n", context.calculate(price));
-
-        context.setVipLevel(0);
-        System.out.printf("满300减20：%f%n", context.calculate(300));
+        DiscountContext context = new DiscountContext();
+        System.out.println("普通会员享受单价：" +
+            context.calculate(price, DiscountContext.VIP_LEVEL_1));
+        System.out.println("黄金会员享受单价：" +
+            context.calculate(price, DiscountContext.VIP_LEVEL_2));
+        System.out.println("满300减20：" +
+            context.calculate(300, DiscountContext.VIP_LEVEL_0));
     }
 
     /**
-     * 模板模式
+     * 模板模式。也是一个应用很多的模式，很多模式都有它的样子，如 静态代理，但是很简单。
+     *   直接的说就是让一段代码下沉到它的子类中实现，通用的代码写父类，有区别的业务下沉。
      */
     @Test
     public void testTemplate() {
-        AAccount account = new AccountInterest(5000);
-        double interest = account.calcInterest();
+        double deposit = 5000d;
+        AAccount account = new ICBCInterest();
+        double interest = account.calcInterest(deposit, -1);
+        System.out.println("5000元 活期利息是：" + interest);
 
-        System.out.printf("5000元 活期利息是：%f%n", interest);
+        interest = account.calcInterest(deposit, 1f);
+        System.out.println("5000元 1年死期利息是：" + interest);
 
-        account = new AccountInterest(5000d, 1f);
-        interest = account.calcInterest();
+        interest = account.calcInterest(deposit, 3f);
+        System.out.println("5000元 3年死期利息是：" + interest);
+        System.out.println();
 
-        System.out.printf("5000元 1年死期利息是：%f%n", interest);
+        account = new CCBInterest();
+        interest = account.calcInterest(deposit, -1);
+        System.out.println("5000元 活期利息是：" + interest);
 
-        account = new AccountInterest(5000d, 3f);
-        interest = account.calcInterest();
+        interest = account.calcInterest(deposit, 1f);
+        System.out.println("5000元 1年死期利息是：" + interest);
 
-        System.out.printf("5000元 3年死期利息是：%f%n", interest);
-
-        account = new AccountInterest(5000d, 5f);
-        interest = account.calcInterest();
-
-        System.out.printf("5000元 5年死期利息是：%f%n", interest);
+        interest = account.calcInterest(deposit, 3f);
+        System.out.println("5000元 3年死期利息是：" + interest);
     }
 
+    /**
+     * 访问者模式。
+     *   示例是一个游乐场的所有娱乐活动接受了两个访问者。
+     *
+     * 访问者模式的逻辑有点绕，被访问者先接待访问者，再由访问者让被访问者启动工作。
+     *   伪代码：被访问者.accept() -> 访问者.visit() -> 被访问者.work()
+     *
+     * 根据具体业务，如果 访问者.visit() 没有初始准备工作，可以省略这一步。
+     */
     @Test
     public void testVisitor() {
-
-        StructureObject object = new StructureObject();
-        List<IElement> elements = object.getList();
-
-        IVisitor visitor = new Visitor();
-        for (IElement element : elements) {
-
-            element.accept(visitor);
+        List<IAmusement> amusements = Playground.getAmusements();
+        IVisitor visitor = new Visitor("展昭");
+        IVisitor visitor2 = new Visitor("腰子");
+        for (IAmusement amusement : amusements) {
+            amusement.accept(visitor);
+            amusement.accept(visitor2);
         }
     }
 }

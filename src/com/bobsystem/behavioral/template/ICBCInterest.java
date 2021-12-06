@@ -1,10 +1,11 @@
 package com.bobsystem.behavioral.template;
 
-public class AccountInterest
+public class ICBCInterest
     extends AAccount {
 
     // 银行死期存款年利率
     private static final double[][] RATES = {
+        // years, interesting
         {5, 0.055},
         {4, 0.052},
         {3, 0.05},
@@ -14,26 +15,17 @@ public class AccountInterest
         {0.25, 0.031} // 3个月
     };
 
-    public AccountInterest(double amount) {
-        super(amount);
-    }
-
-    public AccountInterest(double amount, float years) {
-        super(amount, years);
+    public ICBCInterest() {
+        System.out.println("ICBC 工商银行的存款信息如下：");
     }
 
     @Override
-    protected double getInterestRate() {
-
-        for (double[] arr : AccountInterest.RATES) {
-
-            double years = arr[0];
-            if (super.years >= years) {
-
+    protected double getInterestRate(final float years) {
+        for (double[] arr : RATES) {
+            if (years >= arr[0]) {
                 return arr[1];
             }
         }
-
-        return 0.005;
+        return 0.0051;
     }
 }

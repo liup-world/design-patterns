@@ -5,9 +5,7 @@ public class RunState
 
     @Override
     public void process(StateContext context) {
-
-        System.out.println("run state.. next stop");
-
-        context.setState(StateContext.stopState);
+        System.out.println("current run -> next stop");
+        context.setState(StateContext.STATE_PAUSE);
     }
 }

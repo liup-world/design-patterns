@@ -14,15 +14,12 @@ public class CashReturn
     /**
      * 现金收取
      */
-    public double calculate(double amount) {
-
+    @Override
+    public double calculate(double amount, float discount) {
         for (int[] arr : returnCash) {
-
             int value = arr[0];
             if (amount >= value) {
-
-                int returnn = arr[1];
-                return amount - returnn;
+                return amount - arr[1];
             }
         }
         return amount;

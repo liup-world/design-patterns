@@ -14,33 +14,27 @@ import com.bobsystem.behavioral.strategy.interfaces.IPriceCalculator;
  */
 public class DiscountContext {
 
-    private int vipLevel;
+    //region enum
+    public static final int VIP_LEVEL_0 = 0;
+    public static final int VIP_LEVEL_1 = 1;
+    public static final int VIP_LEVEL_2 = 2;
+    //endregion enum
 
+    // 满减算法
     private static final IPriceCalculator CASH_RETURN = new CashReturn();
+
+    // 折扣算法
     private static final Discount DISCOUNT = new Discount();
 
-    public double calculate(double price) {
-
-        switch (this.vipLevel) {
+    public double calculate(double price, final int vipLevel) {
+        switch (vipLevel) {
             case 1:
-                DISCOUNT.setDiscount(0.95f);
-                return DISCOUNT.calculate(price);
+                return DISCOUNT.calculate(price, 0.95f);
             case 2:
-                DISCOUNT.setDiscount(0.85f);
-                return DISCOUNT.calculate(price);
+                return DISCOUNT.calculate(price, 0.85f);
+            case 0:
             default:
-                return CASH_RETURN.calculate(price);
+                return CASH_RETURN.calculate(price, 1);
         }
     }
-
-    //region getter setter
-
-    public int getVipLevel() {
-        return vipLevel;
-    }
-
-    public void setVipLevel(int vipLevel) {
-        this.vipLevel = vipLevel;
-    }
-    //endregion
 }

@@ -1,8 +1,8 @@
 package com.bobsystem.behavioral.visitor.interfaces;
 
-public interface IElement {
+public interface IAmusement {
 
     void accept(IVisitor visitor);
 
-    void work();
+    void start(String name);
 }
