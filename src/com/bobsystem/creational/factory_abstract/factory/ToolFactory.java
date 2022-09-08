@@ -9,7 +9,7 @@ import com.bobsystem.creational.factory_abstract.tool.interfaces.IToolCreator;
 public class ToolFactory
     implements IToolFactory {
 
-    private static IToolFactory instance;
+    private static final IToolFactory INSTANCE = new ToolFactory();
 
     //region CONSTANT
     private static final IToolCreator FACTORY_PAINTER = new PainterCreator();
@@ -20,14 +20,7 @@ public class ToolFactory
     private ToolFactory() { }
 
     public static IToolFactory instance() {
-        if (instance == null) {
-            synchronized (ToolFactory.class) {
-                if (instance == null) {
-                    instance = new ToolFactory();
-                }
-            }
-        }
-        return instance;
+        return INSTANCE;
     }
 
     //region member methods

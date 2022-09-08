@@ -1,28 +1,29 @@
 package com.bobsystem.structural.proxy.dynamic;
 
-import com.bobsystem.structural.proxy.dynamic.interfaces.IRegister;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * 大致逻辑：
- *   DynamicProxy 实现了 InvocationHandler 接口，
- *   DynamicProxy.setTarget() 返回 Target 的代理对象，
- *   在调用 IRegister.regist()时 代理对象的方法生效
+ * 大致逻辑： <br />
+ *   此类实现了 {@link InvocationHandler } 接口，
+ *   传入被代理对象 {@link DynamicProxy#setTarget(Object) } 返回了它的代理，
+ *   也就是 {@link DynamicProxy } 的实例 <br />
+ *   在调用被代理对象的任何方法时，
+ *   将被 {@link DynamicProxy#invoke(Object, Method, Object[]) } 替代。 <br />
  */
 public class DynamicProxy
     implements InvocationHandler {
 
-    private IRegister target;
+    private Object target;
 
     /**
      * 设置委托人
-     * @param target @see inline {@link this.target}
+     *
+     * @param target 被代理目标 @see {@link DynamicProxy#target }
      * @return proxy instance
      */
-    public Object setTarget(IRegister target) {
+    public Object setTarget(Object target) {
         this.target = target;
         Class<?> clazz = target.getClass();
         return Proxy.newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), this);
@@ -33,12 +34,12 @@ public class DynamicProxy
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args)
-        throws Throwable {
-        //
+        throws Throwable
+    {
         System.out.println("*********** begin ***********");
-        addMoney();
+        this.addMoney();
         Object result = method.invoke(this.target, args);
-        revokeMoney();
+        this.revokeMoney();
         System.out.println("************ end ************");
         return result;
     }

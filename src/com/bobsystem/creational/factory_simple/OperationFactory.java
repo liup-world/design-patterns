@@ -12,7 +12,9 @@ import com.bobsystem.creational.factory_simple.operation.OperateMultiply;
  *
  * 加减乘除运算
  */
-public class OperationFactory {
+public final class OperationFactory {
+
+    private OperationFactory() { }
 
     public static Operation create(OperationType type) {
 

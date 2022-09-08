@@ -6,14 +6,26 @@ package com.bobsystem.behavioral.memento;
 public class GameRole
     implements Cloneable {
 
-    private int vitality; // 生命力
-    private int attack;  // 攻击力
-    private int defense; // 防御力
+    //region property fields
+    /**
+     * 生命力
+     */
+    private int vitality;
+    /**
+     * 攻击力
+     */
+    private int attack;
+    /**
+     * 防御力
+     */
+    private int defense;
+    //endregion property fields
 
     public GameRole() {
         this.defense = this.vitality = this.attack = 100;
     }
 
+    //region member methods
     //region 备忘录模式 相关机制
     /**
      * 复制角色状态
@@ -55,6 +67,7 @@ public class GameRole
         return String.format("生命力：%d，攻击力：%d，防御力：%d",
             this.vitality, this.attack, this.defense);
     }
+    //endregion member methods
 
     //region getter setter
 
@@ -81,6 +94,5 @@ public class GameRole
     public void setDefense(int defense) {
         this.defense = defense;
     }
-
-    //endregion
+    //endregion getter setter
 }

@@ -7,10 +7,12 @@ package com.bobsystem.behavioral.mediator;
  */
 public abstract class APlayerMediator {
 
+    //region property fields
     protected Memory memory;
     protected CPU cpu;
     protected DisplayCard displayCard;
     protected SoundCard soundCard;
+    //endregion property fields
 
     /**
      * 发生耦合的地方，将耦合集中到这里
@@ -21,21 +23,25 @@ public abstract class APlayerMediator {
         this.memory.process(null);
     }
 
-    //region getter setter
+    //region setter
     public void setMemory(Memory memory) {
         this.memory = memory;
+        memory.setMediator(this);
     }
 
     public void setCpu(CPU cpu) {
         this.cpu = cpu;
+        cpu.setMediator(this);
     }
 
     public void setDisplayCard(DisplayCard displayCard) {
         this.displayCard = displayCard;
+        displayCard.setMediator(this);
     }
 
     public void setSoundCard(SoundCard soundCard) {
         this.soundCard = soundCard;
+        soundCard.setMediator(this);
     }
-    //endregion
+    //endregion setter
 }

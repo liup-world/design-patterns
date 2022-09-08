@@ -22,6 +22,6 @@ public class Singleton {
     }
 
     public void sumary() {
-        System.out.println("保证一个类仅有一个实例，并提供一个访问它的全局访问点。");
+        System.out.println("通过自己维护实例，保证一个类仅有一个实例，并提供一个访问它的全局访问点。");
     }
 }

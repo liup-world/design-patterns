@@ -1,23 +1,23 @@
 package com.bobsystem.structural.decorator;
 
-import com.bobsystem.structural.decorator.interfaces.IPaint;
+import com.bobsystem.structural.decorator.interfaces.IPainter;
 
 public class Painter
-    implements IPaint {
+    implements IPainter {
 
-    private IPaint paint;
+    private IPainter painter;
 
     protected Painter() { }
 
-    public Painter(IPaint paint) {
-        this.paint = paint;
+    public Painter(IPainter painter) {
+        this.painter = painter;
     }
 
     @Override
     public void paint() {
-        IPaint paint = this.paint;
-        if (paint != null) {
-            paint.paint();
+        IPainter painter = this.painter;
+        if (painter != null) {
+            painter.paint();
         }
     }
 }

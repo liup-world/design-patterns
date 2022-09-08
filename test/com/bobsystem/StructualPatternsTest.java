@@ -22,8 +22,9 @@ import com.bobsystem.structural.facade.Computer;
 
 import com.bobsystem.structural.flyweight.IPhone;
 import com.bobsystem.structural.proxy.dynamic.DynamicProxy;
-import com.bobsystem.structural.proxy.dynamic.RegisterPerson;
-import com.bobsystem.structural.proxy.dynamic.interfaces.IRegister;
+import com.bobsystem.structural.proxy.dynamic.Register;
+import com.bobsystem.structural.proxy.dynamic.interfaces.IMakeSeal;
+import com.bobsystem.structural.proxy.dynamic.interfaces.IRegist;
 
 import com.bobsystem.structural.proxy.staticc.NiceBoy;
 import com.bobsystem.structural.proxy.staticc.BoyProxy;
@@ -32,9 +33,14 @@ import com.bobsystem.structural.proxy.staticc.interfaces.IGivingGift;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
-// 结构型模式
+/**
+ * 结构型模式
+ */
 public class StructualPatternsTest {
 
+    /**
+     * 适配器模式
+     */
     @Test
     public void testAdapter() {
         HKPlug hkPlug = new HKPlug();
@@ -43,7 +49,8 @@ public class StructualPatternsTest {
     }
 
     /**
-     * 桥接模式。解决对象继承在某些业务中，造成混乱，不好维护的问题。
+     * 桥接模式。
+     *   解决对象继承在某些业务中，造成混乱，不好维护的问题。
      *   代码中的咖啡示例，用装饰模式、行为模式中的命令模式也很适合。
      */
     @Test
@@ -148,11 +155,17 @@ public class StructualPatternsTest {
 
     @Test
     public void testDynamicProxy() {
+        Register person = new Register();
         DynamicProxy proxy = new DynamicProxy();
-        IRegister register = (IRegister)proxy.setTarget(new RegisterPerson());
-        register.regist();
+        Object proxyObj = proxy.setTarget(person);
+        ((IRegist) proxyObj).regist();
+        //
         System.out.println();
-        register.makeOfficialSeal();
+        ((IMakeSeal) proxyObj).makeOfficialSeal();
+        //
+        System.out.println();
+        person.regist();
+        person.makeOfficialSeal();
     }
     //endregion proxy pattern
 }

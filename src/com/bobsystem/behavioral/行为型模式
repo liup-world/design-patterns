@@ -5,7 +5,7 @@
   interpreter 解释器模式
 
   mediator 中介模式
-  role  备忘录模式
+  memento  备忘录模式
   observer 观察者模式
 
   responsibility 职责链模式

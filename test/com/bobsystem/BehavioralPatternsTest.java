@@ -76,6 +76,7 @@ public class BehavioralPatternsTest {
 
     /**
      * 解释器模式
+     *   这个例子很不好。待改造
      */
     @Test
     public void testInterpreter() {
@@ -95,15 +96,15 @@ public class BehavioralPatternsTest {
      *   示例有一个 播放电影的中介对象，还有 内存、CPU、声卡、显卡。
      *   每个具体的硬件内部都引用中介，在执行完任务后，将控制权交给中介，
      *     由中介将该过程处理的结果交给下一过程。
-     *   在机制与策略的角度上看，中介对象就是策略，也是耦合发生的地方。
+     *   在机制与策略分离的角度上看，中介对象就是策略，也是耦合发生的地方。
      */
     @Test
     public void testMediator() {
         APlayerMediator mediator = new PlayerMediator();
-        mediator.setMemory(new Memory(mediator));
-        mediator.setCpu(new CPU(mediator));
-        mediator.setDisplayCard(new DisplayCard(mediator));
-        mediator.setSoundCard(new SoundCard(mediator));
+        mediator.setMemory(new Memory());
+        mediator.setCpu(new CPU());
+        mediator.setDisplayCard(new DisplayCard());
+        mediator.setSoundCard(new SoundCard());
         mediator.play();
     }
 
@@ -139,28 +140,20 @@ public class BehavioralPatternsTest {
      *   这个模式应该是应用最多的模式，C/S 结构的编程中，所有的事件处理都是这个模式。
      *     如 Android 原生开发、win32、C# 的事件处理机制。JavaScript 事件处理大体上也是。
      *   当系统得到一个事件消息，会执行相应方法，方法中会通知观察者，观察者是用户自定义事件。
-     * 观察者模式，一个重要的特征是，可以撤销观察者。
+     * 观察者模式，一个重要的特征是，观察者可以有多个，且可以撤销。
      */
     @Test
     public void testObserver() {
+        IObserver observer = state -> System.out.println("“坏”老师告诉家长：" + state);
+        IObserver observer2 =
+            state -> System.out.println("同时提醒学生要认真听课。因为：" + state);
+        //
         Concreate subject = new Concreate();
-        // attach 一个观察者
-        subject.attach(new IObserver() {
-            @Override
-            public void invoke(String state) {
-                System.out.println("“坏”老师告诉家长。" + state);
-            }
-        });
-        IObserver observer = new IObserver() {
-            @Override
-            public void invoke(String state) {
-                System.out.println("同时提醒学生要认真听课。因为：" + state);
-            }
-        };
-        subject.attach(observer);
-        subject.attach(observer);
-        subject.attach(observer);
-        subject.detach(observer); // detach a observer
+        subject.attach(observer); // attach observer
+        subject.attach(observer2); // attach observer2
+        subject.attach(observer2);
+        subject.attach(observer2);
+        subject.detach(observer2); // detach a observer
         subject.setState("贪睡的学生在睡觉。");
         subject.setState("学生又双叕在睡觉。");
     }
@@ -219,8 +212,8 @@ public class BehavioralPatternsTest {
     }
 
     /**
-     * 模板模式。也是一个应用很多的模式，很多模式都有它的样子，如 静态代理，但是很简单。
-     *   直接的说就是让一段代码下沉到它的子类中实现，通用的代码写父类，有区别的业务下沉。
+     * 模板模式。
+     *   直接地说就是让一段代码下沉到它的子类中实现，通用的代码写父类，有区别的业务下沉。
      */
     @Test
     public void testTemplate() {

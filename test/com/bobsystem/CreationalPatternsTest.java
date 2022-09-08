@@ -29,6 +29,8 @@ import com.bobsystem.creational.prototype.Prototype;
 
 import com.bobsystem.creational.singleton.Singleton;
 
+import com.bobsystem.creational.singleton.Singleton2;
+import com.bobsystem.creational.singleton.Singleton3;
 import org.junit.Test;
 
 /**
@@ -36,10 +38,13 @@ import org.junit.Test;
  */
 public class CreationalPatternsTest {
 
+    /**
+     * 建造者模式
+     */
     @Test
     public void testBuilder() {
         IAirplanBuilder builder = new Airplan.Builder();
-        Airplan airplan = (Airplan)builder.build();
+        Airplan airplan = (Airplan) builder.build();
         System.out.println(airplan);
 
         builder = new WingComponent.Builder();
@@ -48,6 +53,9 @@ public class CreationalPatternsTest {
     }
 
     //region 3 个工厂模式
+    /**
+     * 在工厂方法模式基础之上，将一组相关的对象的创建放入一个工厂。
+     */
     @Test
     public void testAbstractFactory() {
         ISuperFactory factory = SuperFactory.instance();
@@ -68,29 +76,34 @@ public class CreationalPatternsTest {
         pencil.use();
     }
 
+    /**
+     * 工厂方法模式，遵循开关原则
+     */
     @Test
     public void testFactoryMethod() {
-        IArithmeticFactory factory = new ArithmeticAddFactory();
-
+        IArithmeticFactory factory = new ArithmeticAddFactory(); // add operation
         Arithmetic arithmetic = factory.create();
         arithmetic.setNumA(3);
         arithmetic.setNumB(5);
-
         double result = arithmetic.getResult();
         System.out.println(result);
     }
 
+    /**
+     * 简单工厂模式
+     */
     @Test
     public void testSimpleFactory() {
         Operation operation = OperationFactory.create(OperationType.divide);
         operation.setNumA(3);
         operation.setNumB(5);
-
-        double result = operation.getResult();
-        System.out.println(result);
+        System.out.println(operation.getResult());
     }
     //endregion 3 个工厂模式
 
+    /**
+     * 原型模式
+     */
     @Test
     public void testPrototype() {
         Prototype prototype = new Prototype();
@@ -104,10 +117,31 @@ public class CreationalPatternsTest {
         }
     }
 
+    /**
+     * 单例模式
+     */
     @Test
     public void testSingleton() {
-
+        // singleton1 自己维护实例
         Singleton singleton = Singleton.getInstance();
+        System.out.println(singleton.hashCode());
+        //
+        singleton = Singleton.getInstance();
+        System.out.println(singleton.hashCode());
         singleton.sumary();
+        // singleton2 利用类初始化机制
+        Singleton2 singleton2 = Singleton2.getInstance();
+        System.out.println(singleton2.hashCode());
+        //
+        singleton2 = Singleton2.getInstance();
+        System.out.println(singleton2.hashCode());
+        singleton2.sumary();
+        // singleton3 利用枚举实现
+        Singleton3 singleton3 = Singleton3.getInstance();
+        System.out.println(singleton3.hashCode());
+        //
+        singleton3 = Singleton3.getInstance();
+        System.out.println(singleton3.hashCode());
+        singleton3.sumary();
     }
 }

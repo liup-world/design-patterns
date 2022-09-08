@@ -10,7 +10,7 @@ public abstract class ASubject {
     //region property fields
     protected String state;
 
-    private final List<IObserver> observers = new ArrayList<IObserver>();
+    private final List<IObserver> observers = new ArrayList<>();
     //endregion property fields
 
     //region member methods
@@ -41,8 +41,9 @@ public abstract class ASubject {
     }
 
     protected void notice() {
+        String state = this.state;
         for (IObserver observer : this.observers) {
-            observer.invoke(this.state);
+            observer.invoke(state);
         }
     }
     //endregion member methods

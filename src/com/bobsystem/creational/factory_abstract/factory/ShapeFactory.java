@@ -10,7 +10,7 @@ import com.bobsystem.creational.factory_abstract.shape.interfaces.IShapeCreator;
 public class ShapeFactory
     implements IShapeFactory {
 
-    private static ShapeFactory instance;
+    private static final IShapeFactory INSTANCE = new ShapeFactory();
 
     //region CONSTANT
     private static final IShapeCreator FACTORY_CIRCLE = new CircleCreator();
@@ -22,14 +22,7 @@ public class ShapeFactory
     private ShapeFactory() { }
 
     public static IShapeFactory instance() {
-        if (instance == null) {
-            synchronized (ShapeFactory.class) {
-                if (instance == null) {
-                    instance = new ShapeFactory();
-                }
-            }
-        }
-        return instance;
+        return INSTANCE;
     }
 
     //region member methods

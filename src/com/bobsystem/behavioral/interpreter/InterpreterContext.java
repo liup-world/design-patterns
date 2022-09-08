@@ -24,14 +24,12 @@ public class InterpreterContext {
             String instruction = instructions[instructionIndex];
             if ("".equals(instruction)) continue;
             if ("right".equals(instruction)) {
-
                 if (this.rightExpression != null) {
                     this.rightExpression.interpreter(this);
                 }
                 continue;
             }
             if ("swim".equals(instruction)) {
-
                 if (this.swimExpression != null) {
                     this.swimExpression.interpreter(this);
                 }

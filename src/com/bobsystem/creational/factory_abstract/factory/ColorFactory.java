@@ -10,7 +10,7 @@ import com.bobsystem.creational.factory_abstract.factory.interfaces.IColorFactor
 public class ColorFactory
     implements IColorFactory {
 
-    private static ColorFactory instance;
+    private static final IColorFactory INSTANCE = new ColorFactory();
 
     //region CONSTANT
     private static final IColorCreator FACTORY_GREEN = new GreenCreator();
@@ -22,14 +22,7 @@ public class ColorFactory
     private ColorFactory() { }
 
     public static IColorFactory instance() {
-        if (instance == null) {
-            synchronized (ColorFactory.class) {
-                if (instance == null) {
-                    instance = new ColorFactory();
-                }
-            }
-        }
-        return instance;
+        return INSTANCE;
     }
 
     //region member methods

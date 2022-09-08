@@ -11,7 +11,6 @@ public abstract class AExpression {
     }
 
     public void interpreter(InterpreterContext context) {
-
         perform(context);
     }
 

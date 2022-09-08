@@ -13,9 +13,7 @@ public class ConcreateChainA
             System.out.println("A success. data = " + data);
             return;
         }
-        AChain chain = super.chain;
-        if (chain != null) {
-            super.chain.process(data);
-        }
+        AChain next = super.chain;
+        if (next != null) next.process(data);
     }
 }

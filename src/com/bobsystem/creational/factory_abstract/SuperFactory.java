@@ -7,12 +7,11 @@ import com.bobsystem.creational.factory_abstract.factory.interfaces.IToolFactory
 import com.bobsystem.creational.factory_abstract.factory.ShapeFactory;
 import com.bobsystem.creational.factory_abstract.factory.ToolFactory;
 
-public class SuperFactory
+public final class SuperFactory
     implements ISuperFactory {
 
-    private static ISuperFactory instance;
-
     //region CONSTANT
+    private static final ISuperFactory INSTANCE = new SuperFactory();
     private static final IShapeFactory FACTORY_SHAPE = ShapeFactory.instance();
     private static final IColorFactory FACTORY_COLOR = ColorFactory.instance();
     private static final IToolFactory FACTORY_Tool = ToolFactory.instance();
@@ -21,14 +20,7 @@ public class SuperFactory
     private SuperFactory() { }
 
     public static ISuperFactory instance() {
-        if (instance == null) {
-            synchronized (SuperFactory.class) {
-                if (instance == null) {
-                    instance = new SuperFactory();
-                }
-            }
-        }
-        return instance;
+        return INSTANCE;
     }
 
     //region member methods

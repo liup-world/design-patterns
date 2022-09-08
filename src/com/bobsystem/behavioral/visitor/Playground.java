@@ -12,7 +12,7 @@ public class Playground {
     public static List<IAmusement> getAmusements() {
         List<IAmusement> list = amusements;
         if (list == null) {
-            list = new ArrayList<IAmusement>();
+            list = new ArrayList<>();
             list.add(new Jumping());
             list.add(new Canoeing());
             amusements = list;
